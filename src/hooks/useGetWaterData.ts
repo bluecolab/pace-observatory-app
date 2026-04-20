@@ -10,6 +10,7 @@ import { cleanHudsonRiverData } from '@/utils/data/cleanHudsonRiverData';
 import getMetadata from '@/utils/getMetadata';
 
 import { getWaterAPIURL } from './getWaterAPIURL';
+import { Platform } from 'react-native';
 
 export default function useGetWaterData() {
     const { stationIds } = getMetadata();
@@ -41,6 +42,26 @@ export default function useGetWaterData() {
                     end_day,
                     stationIds
                 );
+
+                if (Platform.OS === 'web') {
+                    const response = await axios.post('/api/bluecolab', {
+                        request: url,
+                    });
+                    const apiData = response.data;
+                    const isBlueColab = BLUE_COLAB_WATER_API_CONFIG.validMatches.some(
+                        (loc) => loc.name === defaultLocation.name
+                    );
+                    const isUSGS = config.USGS_WATER_SERVICES_API_CONFIG.validMatches.some(
+                        (loc) => loc.name === defaultLocation.name
+                    );
+                    if (isBlueColab) {
+                        return cleanChoatePondData(apiData);
+                    }
+                    if (isUSGS) {
+                        return cleanHudsonRiverData(apiData);
+                    }
+                    throw new Error('Invalid location provided');
+                }
 
                 const response = await axios.get(url);
                 const apiData = response.data;
