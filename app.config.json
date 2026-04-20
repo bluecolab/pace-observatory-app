@@ -6,7 +6,7 @@
     "scheme": "expo-nav-template",
     "web": {
       "bundler": "metro",
-      "output": "static",
+      "output": "server",
       "favicon": "./assets/favicon.png"
     },
     "plugins": [

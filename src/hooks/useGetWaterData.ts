@@ -43,17 +43,19 @@ export default function useGetWaterData() {
                     stationIds
                 );
 
-                if (Platform.OS === 'web') {
+                const isBlueColab = BLUE_COLAB_WATER_API_CONFIG.validMatches.some(
+                    (loc) => loc.name === defaultLocation.name
+                );
+                const isUSGS = config.USGS_WATER_SERVICES_API_CONFIG.validMatches.some(
+                    (loc) => loc.name === defaultLocation.name
+                );
+
+
+                if (Platform.OS === 'web' && isBlueColab) {
                     const response = await axios.post('/api/bluecolab', {
                         request: url,
                     });
                     const apiData = response.data;
-                    const isBlueColab = BLUE_COLAB_WATER_API_CONFIG.validMatches.some(
-                        (loc) => loc.name === defaultLocation.name
-                    );
-                    const isUSGS = config.USGS_WATER_SERVICES_API_CONFIG.validMatches.some(
-                        (loc) => loc.name === defaultLocation.name
-                    );
                     if (isBlueColab) {
                         return cleanChoatePondData(apiData);
                     }
@@ -65,13 +67,6 @@ export default function useGetWaterData() {
 
                 const response = await axios.get(url);
                 const apiData = response.data;
-
-                const isBlueColab = BLUE_COLAB_WATER_API_CONFIG.validMatches.some(
-                    (loc) => loc.name === defaultLocation.name
-                );
-                const isUSGS = config.USGS_WATER_SERVICES_API_CONFIG.validMatches.some(
-                    (loc) => loc.name === defaultLocation.name
-                );
 
                 if (isBlueColab) {
                     return cleanChoatePondData(apiData);

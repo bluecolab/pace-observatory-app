@@ -4,5 +4,5 @@
  * @returns {JSX.Element}
  */
 export default function CustomWebViewIframe({ uri }: { uri: string }) {
-    return <iframe src={uri} style={{ flex: 1 }} sandbox="allow-scripts allow-same-origin" />;
+    return <iframe src={uri} style={{ width: '100%', height: '100%', border: 0, display: 'block' }} sandbox="allow-scripts allow-same-origin" />;
 }

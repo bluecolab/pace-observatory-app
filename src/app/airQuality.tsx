@@ -1,11 +1,12 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { router, Stack } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { View, Text, ScrollView, Modal, Pressable } from 'react-native';
-import WebView from 'react-native-webview';
+import { View, Text, ScrollView, Modal, Pressable, Platform } from 'react-native';
 
+import CustomWebView from '@/components/CustomWebView';
 import { Widget, SENSOR_MAP } from '@/components/visualizations/Widget';
 import PolarChart from '@/components/visualizations/WQI/PolarChart';
+import PolarChartVictoryWeb from '@/components/visualizations/WQI/PolarChart-web';
 import { useColorScheme } from '@/contexts/ColorSchemeContext';
 import { useCurrentData } from '@/contexts/CurrentDataContext';
 
@@ -93,7 +94,13 @@ export default function AirQuality() {
                                     {category}
                                 </Text>
                             </View>
-                            <PolarChart percent={Math.round(percent)} isDark={isDark} />
+                            {
+                                Platform.OS === 'web' ? (
+                                    <PolarChartVictoryWeb percent={Math.round(percent)} isDark={isDark} />
+                                ) : (
+                                    <PolarChart percent={Math.round(percent)} isDark={isDark} />
+                                )
+                            }
                         </View>
                         <Text className="mt-2 text-center text-sm dark:text-darkText">
                             US EPA Air Quality Index
@@ -146,24 +153,20 @@ export default function AirQuality() {
                                 <Text className="text-center text-lg dark:bg-darkCardBackground dark:text-darkText">
                                     Softball Field
                                 </Text>
-                                <WebView
-                                    className="rounded-lg border-0"
-                                    source={{
-                                        uri: `https://bluecolab.github.io/grafana-dashboard-gallery/purple-air-1?isDark=${isDark}`,
-                                    }}
-                                    scrollEnabled={false}
+                                <CustomWebView
+                                    // className="rounded-lg border-0"
+                                    uri={`https://bluecolab.github.io/grafana-dashboard-gallery/purple-air-1?isDark=${isDark}`}
+                                    // scrollEnabled={false}
                                 />
                             </View>
                             <View className="h-[500px] w-full">
                                 <Text className="text-center text-lg dark:bg-darkCardBackground dark:text-darkText">
                                     Nature Center
                                 </Text>
-                                <WebView
-                                    className="rounded-lg border-0"
-                                    source={{
-                                        uri: `https://bluecolab.github.io/grafana-dashboard-gallery/purple-air-2?isDark=${isDark}`,
-                                    }}
-                                    scrollEnabled={false}
+                                <CustomWebView
+                                    // className="rounded-lg border-0"
+                                    uri={`https://bluecolab.github.io/grafana-dashboard-gallery/purple-air-2?isDark=${isDark}`}
+                                    // scrollEnabled={false}
                                 />
                             </View>
                         </ScrollView>

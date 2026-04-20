@@ -1,6 +1,5 @@
 // 10 - 10 - 2025 - Vic
 // components/visualizations/WQI/PolarChartVictoryWeb.tsx
-import React from 'react';
 import { VictoryPie } from 'victory';
 
 export type PolarChartProps = {
