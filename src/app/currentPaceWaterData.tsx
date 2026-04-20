@@ -1,11 +1,7 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { router, Stack } from 'expo-router';
 import { useCallback } from 'react';
-<<<<<<< HEAD:aquawatch_mobile_app/app/(tabs)/currentData.tsx
-import { View, Text, ScrollView, RefreshControl, TouchableOpacity, Platform } from 'react-native';
-=======
-import { View, Text, ScrollView, RefreshControl, Pressable } from 'react-native';
->>>>>>> 9c0f4db9b4969d338980c25d9faf99e91db550eb:src/app/currentPaceWaterData.tsx
+import { View, Text, ScrollView, RefreshControl, Pressable, Platform } from 'react-native';
 
 import { Widget } from '@/components/visualizations/Widget';
 import { WQICard } from '@/components/visualizations/WQI/WQICard';
@@ -60,7 +56,6 @@ export default function CurrentPaceWaterData() {
 
     return (
         <>
-<<<<<<< HEAD:aquawatch_mobile_app/app/(tabs)/currentData.tsx
             {Platform.OS !== 'web' && (
                 <Stack.Screen
                     options={{
@@ -73,7 +68,6 @@ export default function CurrentPaceWaterData() {
                     }}
                 />
             )}
-=======
             <Stack.Screen
                 options={{
                     headerTitle: 'Current Data',
@@ -85,7 +79,6 @@ export default function CurrentPaceWaterData() {
                     headerBackTitle: 'Home',
                 }}
             />
->>>>>>> 9c0f4db9b4969d338980c25d9faf99e91db550eb:src/app/currentPaceWaterData.tsx
             <ScrollView
                 className="h-full bg-lightBackground dark:bg-darkBackground"
                 refreshControl={

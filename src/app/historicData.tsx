@@ -13,12 +13,8 @@ import ComparisonCard from '@/components/visualizations/monthlyData/ComparisonCa
 import { MonthlyDataCard } from '@/components/visualizations/monthlyData/MonthlyDataCard';
 import { WQICard } from '@/components/visualizations/WQI/WQICard';
 import { useColorScheme } from '@/contexts/ColorSchemeContext';
-<<<<<<< HEAD:aquawatch_mobile_app/app/(tabs)/home/historicData.tsx
-import { useGraphData } from '@/contexts/GraphDataContext';
 import { config } from '@/hooks/useConfig';
-=======
 import useGetGraphData from '@/hooks/useGetGraphData';
->>>>>>> 9c0f4db9b4969d338980c25d9faf99e91db550eb:src/app/historicData.tsx
 import getMetadata from '@/utils/getMetadata';
 
 const getDaysInMonthFn = (month: number, year: number) => {
@@ -368,7 +364,7 @@ export default function HistoricData() {
                         onPress={onPressPagination}
                     />
 
-                    {config.BLUE_COLAB_API_CONFIG.validMatches.some(
+                    {config.BLUE_COLAB_WATER_API_CONFIG.validMatches.some(
                         (loc) => loc.name === defaultLocation?.name
                     ) ? (
                         <View className="mb-12 mt-6 items-center px-4">

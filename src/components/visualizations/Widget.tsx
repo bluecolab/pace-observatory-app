@@ -264,11 +264,7 @@ export function Widget({ name, value, hideStatus }: WidgetProp) {
                     Back={
                         <View className="h-[150]">
                             <ScrollView
-<<<<<<< HEAD:aquawatch_mobile_app/components/visualizations/Widget.tsx
-                                className="h-[150] rounded-3xl bg-white p-4 dark:bg-gray-700"
-=======
                                 className="h-full rounded-3xl bg-white p-4 dark:bg-darkCardBackground"
->>>>>>> 9c0f4db9b4969d338980c25d9faf99e91db550eb:src/components/visualizations/Widget.tsx
                                 contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
                                 keyboardShouldPersistTaps="handled" // Ensures ScrollView handles taps
                             >
