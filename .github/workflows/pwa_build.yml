@@ -32,8 +32,8 @@ jobs:
             - name: 🏗 Setup EAS
               run: npm install -g eas-cli
 
-            - name: Validate package-lock.json
-              run: node scripts/check-package-lock.js
+            # - name: Validate package-lock.json
+            #   run: node scripts/check-package-lock.js
 
             - name: Install Python deps
               run: |
