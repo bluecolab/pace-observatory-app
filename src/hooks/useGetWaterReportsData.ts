@@ -17,9 +17,12 @@ export default function useGetWaterReportsData() {
             }
 
             // fetch base URL with timeout
-            const base_url = await axios.get('https://aquawatchmobile.expo.app/api/waterreports', {
-                timeout: TIMEOUT_MS,
-            });
+            const base_url = await axios.get(
+                'https://pace-environmental-observatoryhmobile.expo.app/api/waterreports',
+                {
+                    timeout: TIMEOUT_MS,
+                }
+            );
 
             const url = `${base_url.data.api_address}/waterReports/latest/report/year/${year}`;
 
