@@ -1,0 +1,38 @@
+[
+  {
+    "label": "Nearest Station",
+    "value": "0"
+  },
+  {
+    "label": "Piermont",
+    "value": "1"
+  },
+  {
+    "label": "West Point",
+    "value": "2"
+  },
+  {
+    "label": "Poughkeepsie",
+    "value": "3"
+  },
+  {
+    "label": "New York City",
+    "value": "4"
+  },
+  {
+    "label": "Albany",
+    "value": "5"
+  },
+  {
+    "label": "Cohoes",
+    "value": "6"
+  },
+  {
+    "label": "Gowanda",
+    "value": "7"
+  },
+  {
+    "label": "Bronx River",
+    "value": "8"
+  }
+]

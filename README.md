@@ -1,7 +1,7 @@
-# AquaWatch Mobile App
+# Pace Environmental Observatory App
 
 <div align="center">
-<img src="./aquawatch_mobile_app/assets/splash.png" height="250px" style="padding:10px;">
+<img src="./assets/splash.png" height="250px" style="padding:10px;">
  
 <br>
 
@@ -28,14 +28,14 @@
   <img src="https://img.shields.io/badge/Runs%20with%20Expo%20Go-4630EB.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000" alt="Runs with Expo Go">
 </a>
 <h2>Bringing water quality to your finger tips!</h2>
-Repo for AquaWatch Mobile app
+Repo for Pace Environmental Observatory app
 
 <hr>
 </div>
 
 ### About the Project
 
-Knowing what's in your water - is a human right. The AquaWatch Mobile App bring water data right to your finger tips. While the current scope of the app is limited to pond and river data, we hope to set an example for what's possible.
+Knowing what's in your water - is a human right. The Pace Environmental Observatory App bring water data right to your finger tips. While the current scope of the app is limited to pond and river data, we hope to set an example for what's possible.
 
 One day you'll know what's in the water that's coming out of your tap.
 
@@ -46,21 +46,9 @@ One day you'll know what's in the water that's coming out of your tap.
 - Information about local wildlife and its dependence on water quality.
 - Access to Blue CoLab blogs.
 
-<hr>
-
-### Repo Structure
-
-- [`.github`](./.github/) The files for workflows for GitHub Actions and the pull request template.
-- [`.vscode`](./.vscode/) The files to configure VS Code setting such that all developers share common settings
-- [`aquawatch_mobile_app`](./aquawatch_mobile_app/) Source code for tbe app
-- [`health_checks`](./health_checks/) Source code for Hudson River location health checks
-- [`website`](./website/) Source code for privacy policy of app
-
-<hr>
-
 ### Getting Started
 
-To get started, please see [here](./aquawatch_mobile_app/README.md)
+To get started, please see [here](./README-EXTENDED.md)
 
 <hr>
 
@@ -79,6 +67,7 @@ The members of the team include:
 - Noor Ul Huda ([![Linkedin](https://i.stack.imgur.com/gVE0j.png)ln/noorulhuda92](https://www.linkedin.com/in/noorulhuda92/)) of Blue CoLab
 - Lizi Imedashvilli ([![Linkedin](https://i.stack.imgur.com/gVE0j.png)ln/lizi-imedashvili-2b3a6b249](https://www.linkedin.com/in/lizi-imedashvili-2b3a6b249/)) of Data Divas
 - Vansh Kanojia ([![Linkedin](https://i.stack.imgur.com/gVE0j.png)vansh-kanojia](https://www.linkedin.com/in/vansh-kanojia/)) of App Team 67
+- Ty Kelley
 - Ari Kotler ([![Linkedin](https://i.stack.imgur.com/gVE0j.png)in/KoJesko](https://www.linkedin.com/in/KoJesko/)) of App Team 67
 - Ardin Kraja ([![Linkedin](https://i.stack.imgur.com/gVE0j.png)ln/ardin-kraja-19ab61230](https://www.linkedin.com/in/ardin-kraja-19ab61230/)) of Blue Jelly
 - Victor Lima ([![Linkedin](https://i.stack.imgur.com/gVE0j.png)ln/victor--lima](https://www.linkedin.com/in/victor--lima/)) of Data Divas
@@ -89,11 +78,4 @@ The members of the team include:
 - Michael Rourke ([![Linkedin](https://i.stack.imgur.com/gVE0j.png)ln/michael-rourke-532b32225](https://www.linkedin.com/in/michael-rourke-532b32225/)) of Blue Shield
 - Erin Sorbella ([![Linkedin](https://i.stack.imgur.com/gVE0j.png)ln/erin-sorbella-40936b241](https://www.linkedin.com/in/erin-sorbella-40936b241/)) of Blue Jelly
 - Tyler Yeung ([![Linkedin](https://i.stack.imgur.com/gVE0j.png)ln/tyleryeung](https://www.linkedin.com/in/tyleryeung/)) of App Team 67
-
-### Screenshots
-
-<div align="center">
-<img src="./screenshots/Screenshot_20250926_142031.png" height="250px" />
-<img src="./screenshots/Screenshot_20250926_142015.png" height="250px"  />
-<img src="./screenshots/Screenshot_20250926_142257.png" height="250px" />
-</div>
+- Leeza Zeidan

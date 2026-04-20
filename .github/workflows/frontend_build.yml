@@ -1,50 +1,85 @@
 name: Expo Prod Build
 run-name: Build of Frontend
 
+permissions:
+    contents: read
+
 on:
-  push:
-    branches:
-      - app-build-branch
-    paths:
-      - "aquawatch_mobile_app/**"
-  workflow_dispatch: # Manual trigger
+    push:
+        branches:
+            - app-build-branch
+    workflow_dispatch: # Manual trigger
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: 🏗 Setup repo
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: 🏗 Setup repo
+              uses: actions/checkout@v6.0.2
+              with:
+                  fetch-depth: 0
 
-      - name: 🏗 Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24.x
+            - name: 🏗 Setup Node
+              uses: actions/setup-node@v6.3.0
+              with:
+                  node-version: 24.x
 
-      - name: Check Node.js and npm version
-        run: |
-          node --version
-          npm --version
+            - name: Check Node.js and npm version
+              run: |
+                  node --version
+                  npm --version
 
-      - name: 🏗 Setup EAS
-        run: npm install -g eas-cli
-      - name: Validate package-lock.json
-        working-directory: ./aquawatch_mobile_app
-        run: node scripts/check-package-lock.js
-      - name: Install dependencies
-        working-directory: ./aquawatch_mobile_app
-        run: npm ci
+            - name: 🏗 Setup EAS
+              run: npm install -g eas-cli
 
-      - name: 🚀 Build Android app
-        working-directory: ./aquawatch_mobile_app
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_ORG_SECRET }}
-        run: eas build --platform android --non-interactive --no-wait
+            - name: Validate package-lock.json
+              run: node scripts/check-package-lock.js
 
-      - name: 🚀 Build Apple app
-        working-directory: ./aquawatch_mobile_app
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-        run: eas build --platform ios --non-interactive --no-wait
+            - name: Install Python deps
+              run: |
+                  python3 -m pip install --upgrade pip
+                  python3 -m pip install python-dotenv
+
+            - name: Configure env files and inject EAS config
+              env:
+                  EAS_OWNER: ${{ secrets.EAS_OWNER }}
+                  EAS_PROJECT_ID: ${{ secrets.EAS_PROJECT_ID }}
+                  EAS_JSON: ${{ secrets.EAS_JSON }}
+                  GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+                  EXPO_PUBLIC_SUPABASE_TABLE: ${{ secrets.EXPO_PUBLIC_SUPABASE_TABLE }}
+                  EXPO_PUBLIC_SUPABASE_SCHEMA: ${{ secrets.EXPO_PUBLIC_SUPABASE_SCHEMA }}
+                  EXPO_PUBLIC_SUPABASE_URL: ${{ secrets.EXPO_PUBLIC_SUPABASE_URL }}
+                  EXPO_PUBLIC_SUPABASE_KEY: ${{ secrets.EXPO_PUBLIC_SUPABASE_KEY }}
+              run: |
+                  python3 scripts/inject_eas_into_appjson.py
+                  python3 scripts/create_json_files.py
+
+            - name: Validate Supabase build variables are present
+              env:
+                  EXPO_PUBLIC_SUPABASE_TABLE: ${{ secrets.EXPO_PUBLIC_SUPABASE_TABLE }}
+                  EXPO_PUBLIC_SUPABASE_SCHEMA: ${{ secrets.EXPO_PUBLIC_SUPABASE_SCHEMA }}
+                  EXPO_PUBLIC_SUPABASE_URL: ${{ secrets.EXPO_PUBLIC_SUPABASE_URL }}
+                  EXPO_PUBLIC_SUPABASE_KEY: ${{ secrets.EXPO_PUBLIC_SUPABASE_KEY }}
+              run: |
+                  test -n "$EXPO_PUBLIC_SUPABASE_TABLE" || (echo "Missing EXPO_PUBLIC_SUPABASE_TABLE" && exit 1)
+                  test -n "$EXPO_PUBLIC_SUPABASE_SCHEMA" || (echo "Missing EXPO_PUBLIC_SUPABASE_SCHEMA" && exit 1)
+                  test -n "$EXPO_PUBLIC_SUPABASE_URL" || (echo "Missing EXPO_PUBLIC_SUPABASE_URL" && exit 1)
+                  test -n "$EXPO_PUBLIC_SUPABASE_KEY" || (echo "Missing EXPO_PUBLIC_SUPABASE_KEY" && exit 1)
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: 🚀 Build Android app
+              env:
+                  EXPO_TOKEN: ${{ secrets.EXPO_ORG_SECRET }}
+              run: eas build --platform android --profile preview --non-interactive --no-wait
+
+            - name: 🚀 Build Apple app
+              env:
+                  EXPO_TOKEN: ${{ secrets.EXPO_ORG_SECRET }}
+              run: eas build --platform ios --non-interactive --no-wait > /dev/null 2>&1
+
+            - name: 🧹 Clean up env files
+              run: |
+                  rm -f eas.json
+                  rm -f google-services.json
