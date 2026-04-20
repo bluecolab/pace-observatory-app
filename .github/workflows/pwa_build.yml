@@ -76,7 +76,6 @@ jobs:
               run: npx eas deploy
               env:
                 EXPO_TOKEN: ${{ secrets.EXPO_ORG_SECRET }}
-                working-directory: ./flight-tracker
                 
             - name: 🧹 Clean up env files
               run: |
