@@ -1,5 +1,6 @@
 import 'react-native-url-polyfill/auto';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Platform } from 'react-native';
 import { createClient, processLock } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL?.trim() || '';
@@ -8,6 +9,7 @@ const supabaseSchema = process.env.EXPO_PUBLIC_SUPABASE_SCHEMA;
 const effectiveSchema = supabaseSchema || 'public';
 
 const hasSupabaseConfig = Boolean(supabaseUrl && supabaseKey);
+const isWebServerRender = Platform.OS === 'web' && typeof window === 'undefined';
 
 if (!hasSupabaseConfig) {
     console.warn(
@@ -19,9 +21,9 @@ export const supabase = hasSupabaseConfig
     ? createClient(supabaseUrl, supabaseKey, {
           db: { schema: effectiveSchema },
           auth: {
-              storage: AsyncStorage,
-              autoRefreshToken: true,
-              persistSession: true,
+              storage: isWebServerRender ? undefined : AsyncStorage,
+              autoRefreshToken: !isWebServerRender,
+              persistSession: !isWebServerRender,
               detectSessionInUrl: false,
               lock: processLock,
           },

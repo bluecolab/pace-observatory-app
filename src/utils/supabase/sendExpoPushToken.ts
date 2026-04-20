@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Platform } from 'react-native';
 
 import { isSupabaseConfigured, supabase } from './supabase';
 
@@ -17,6 +18,7 @@ async function ensureAnonAuthSession() {
 
 export async function sendExpoPushToken(token: string) {
     if (!token) return;
+    if (Platform.OS === 'web' && typeof window === 'undefined') return;
     if (!isSupabaseConfigured || !supabaseTable) return;
     if (!supabase) return;
 

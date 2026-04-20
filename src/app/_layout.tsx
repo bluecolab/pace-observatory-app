@@ -17,7 +17,7 @@ export const unstable_settings = {
     initialRouteName: 'index',
 };
 
-if (Device.isDevice) {
+if (Platform.OS !== 'web' && Device.isDevice) {
     Notifications.setNotificationHandler({
         handleNotification: async () => ({
             shouldPlaySound: true,
@@ -34,6 +34,8 @@ function handleRegistrationError(errorMessage: string) {
 }
 
 async function registerForPushNotificationsAsync() {
+    if (Platform.OS === 'web') return;
+
     if (Platform.OS === 'android') {
         await Notifications.setNotificationChannelAsync('default', {
             name: 'default',
@@ -108,6 +110,8 @@ function RootLayout() {
     );
 
     useEffect(() => {
+        if (Platform.OS === 'web') return;
+
         registerForPushNotificationsAsync()
             .then((token) => setExpoPushToken(token ?? ''))
             .catch((error: any) => setExpoPushToken(`${error}`));
