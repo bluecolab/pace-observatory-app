@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Pace Environmental Observatory",
-    "slug": "pace-environmental-observatory",
+    "slug": "AquaWatch_Mobile",
     "version": "1.10.0",
     "scheme": "expo-nav-template",
     "web": {
