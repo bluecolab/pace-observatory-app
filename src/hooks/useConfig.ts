@@ -42,5 +42,4 @@ export const config = {
             { name: 'Cohoes', lat: 42.78569444, long: -73.7104167 },
         ],
     },
-    OPEN_WEATHER_API_URL: 'https://api.openweathermap.org',
 };

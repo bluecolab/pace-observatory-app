@@ -6,11 +6,16 @@
     "scheme": "expo-nav-template",
     "web": {
       "bundler": "metro",
-      "output": "static",
+      "output": "server",
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-router",
+      [
+        "expo-router",
+        {
+            "origin": "https://pace-environmental-observatory.expo.app/"
+        }
+    ],
       [
         "expo-location",
         {
