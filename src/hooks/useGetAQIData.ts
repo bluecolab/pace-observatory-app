@@ -1,9 +1,31 @@
 import axios, { isAxiosError } from 'axios';
+import Constants from 'expo-constants';
 import { useNetworkState } from 'expo-network';
 import { useCallback } from 'react';
+import { Platform } from 'react-native';
 
 import { OpenWeatherAQI } from '@/types/water.interface';
 import { calculateUSAQI } from '@/utils/calculateUSAQI';
+
+const getOpenWeatherApiUrl = () => {
+    if (Platform.OS === 'web') {
+        return '/api/openweathermap';
+    }
+
+    const hostUri = Constants.expoConfig?.hostUri;
+    if (hostUri) {
+        return `http://${hostUri}/api/openweathermap`;
+    }
+
+    const apiOrigin = process.env.EXPO_PUBLIC_API_ORIGIN?.trim();
+    if (apiOrigin) {
+        return `${apiOrigin.replace(/\/$/, '')}/api/openweathermap`;
+    }
+
+    throw new Error(
+        'Missing API origin. Set EXPO_PUBLIC_API_ORIGIN for native builds, or run web against the Expo origin.'
+    );
+};
 
 export default function useGetAQIData() {
     const networkState = useNetworkState();
@@ -14,7 +36,7 @@ export default function useGetAQIData() {
         }
 
         try {
-            const response = await axios.get('/api/openweathermap');
+            const response = await axios.get(getOpenWeatherApiUrl());
             const apiData = response.data as OpenWeatherAQI;
 
             // Validate that we have data in the list (runtime check)
