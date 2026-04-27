@@ -73,7 +73,7 @@ jobs:
               run: npx expo export --platform web
 
             - name: 📂 Upload build artifacts
-              run: npx eas deploy
+              run: npx eas deploy --prod --non-interactive
               env:
                 EXPO_TOKEN: ${{ secrets.EXPO_ORG_SECRET }}
                 
