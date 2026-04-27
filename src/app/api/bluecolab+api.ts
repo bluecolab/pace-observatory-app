@@ -1,3 +1,4 @@
+// Proxy endpoint for BlueColab API requests to avoid CORS issues
 export async function POST(request: Request) {
     const { request: url } = await request.json();
     const urlObj = URL.parse(url);

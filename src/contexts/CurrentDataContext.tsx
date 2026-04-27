@@ -105,11 +105,7 @@ export default function CurrentDataProvider({ children }: { children: ReactNode 
         refetch: refetchAQI,
     } = useQuery({
         queryKey: ['aqiData', config.BLUE_COLAB_WATER_API_CONFIG.validMatches[0]],
-        queryFn: () =>
-            fetchAQIData(
-                config.BLUE_COLAB_WATER_API_CONFIG.validMatches[0].lat as number,
-                config.BLUE_COLAB_WATER_API_CONFIG.validMatches[0].long as number
-            ),
+        queryFn: () => fetchAQIData(),
         enabled: true,
     });
 
