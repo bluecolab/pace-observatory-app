@@ -5,17 +5,41 @@ import type { ReactNode } from 'react';
 import { useUserSettings } from '@/contexts/UserSettingsContext';
 import useGetClosestStation from '@/hooks/useClosestStation';
 import { config } from '@/hooks/useConfig';
-import useGetAQIData from '@/hooks/useGetAQIData';
 import useGetOdinData from '@/hooks/useGetOdinData';
+import { useGetPurpleAirData } from '@/hooks/useGetPurpleAirData';
 import useGetWaterData from '@/hooks/useGetWaterData';
 import useGetWaterReportsData from '@/hooks/useGetWaterReportsData';
 import { LocationType } from '@/types/location.type';
-import { CleanedWaterData, OdinData, OpenWeatherAQI } from '@/types/water.interface';
+import { CleanedWaterData, OdinData } from '@/types/water.interface';
 
+function getAQICategory(aqi: number) {
+    if (aqi <= 50) return 'Good';
+    if (aqi <= 100) return 'Moderate';
+    if (aqi <= 150) return 'Unhealthy for Sensitive Groups';
+    if (aqi <= 200) return 'Unhealthy';
+    if (aqi <= 300) return 'Very Unhealthy';
+    return 'Hazardous';
+}
+
+type PurpleAirAQI = {
+    usAQI: {
+        aqi: number;
+        category: string;
+        dominantPollutant: string;
+    };
+    list: {
+        components: {
+            pm2_5?: number;
+            humidity?: number;
+            temperature?: number;
+            pressure?: number;
+        };
+    }[];
+};
 interface CurrentDataContextType {
     waterData: CleanedWaterData[] | undefined;
     airData?: OdinData | undefined;
-    aqiData?: OpenWeatherAQI | undefined;
+    aqiData?: PurpleAirAQI | undefined;
     waterReportsData?: any | undefined;
     closestStation: LocationType | undefined;
     waterError: Error | null;
@@ -46,7 +70,7 @@ export default function CurrentDataProvider({ children }: { children: ReactNode 
     const { defaultTemperatureUnit } = useUserSettings();
     const { fetchWaterData } = useGetWaterData();
     const { fetchOdinData } = useGetOdinData();
-    const { fetchAQIData } = useGetAQIData();
+    //const { fetchAQIData } = useGetAQIData();
     const { fetchWaterReportsData } = useGetWaterReportsData();
 
     const closestStation = useGetClosestStation();
@@ -99,15 +123,31 @@ export default function CurrentDataProvider({ children }: { children: ReactNode 
     });
 
     // AQI Data Query
-    const {
-        data: aqiData,
-        error: aqiError,
-        refetch: refetchAQI,
-    } = useQuery({
-        queryKey: ['aqiData', config.BLUE_COLAB_WATER_API_CONFIG.validMatches[0]],
-        queryFn: () => fetchAQIData(),
-        enabled: true,
-    });
+    const { data: purpleAirData, error: aqiError, refetch: refetchAQI } = useGetPurpleAirData();
+
+    const normalizedAQIData = useMemo(() => {
+        const sensor = purpleAirData?.[0];
+
+        if (!sensor) return undefined;
+
+        return {
+            usAQI: {
+                aqi: sensor.usAQI,
+                category: getAQICategory(sensor.usAQI),
+                dominantPollutant: 'PM2.5',
+            },
+            list: [
+                {
+                    components: {
+                        pm2_5: sensor['pm2.5_atm'],
+                        humidity: sensor.humidity,
+                        temperature: sensor.temperature,
+                        pressure: sensor.pressure,
+                    },
+                },
+            ],
+        };
+    }, [purpleAirData]);
 
     // Water Reports Data Query
     const { data: waterReportsData, error: reportsError } = useQuery({
@@ -127,7 +167,7 @@ export default function CurrentDataProvider({ children }: { children: ReactNode 
         () => ({
             waterData: waterData ?? [],
             airData,
-            aqiData,
+            aqiData: normalizedAQIData,
             waterReportsData,
             closestStation: closestStation.closestStation,
             waterError,
@@ -140,7 +180,7 @@ export default function CurrentDataProvider({ children }: { children: ReactNode 
         [
             waterData,
             airData,
-            aqiData,
+            normalizedAQIData,
             waterReportsData,
             closestStation.closestStation,
             waterError,
