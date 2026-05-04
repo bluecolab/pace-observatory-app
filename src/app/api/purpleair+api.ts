@@ -87,10 +87,10 @@ export async function GET() {
     const PURPLEAIR_READ_KEY = env.PURPLEAIR_READ_KEY ?? '';
     const PURPLEAIR_SENSOR_IDS = env.PURPLEAIR_SENSOR_IDS?.split(',') || [];
     const MOCK_DATA = env.MOCK_DATA === 'true';
-//     const PURPLEAIR_API_KEY = process.env.PURPLEAIR_API_KEY ?? '';
-//     const PURPLEAIR_READ_KEY = process.env.PURPLEAIR_READ_KEY ?? '';
-//     const PURPLEAIR_SENSOR_IDS = process.env.PURPLEAIR_SENSOR_IDS?.split(',') || [];
-//     const MOCK_DATA = process.env.MOCK_DATA === 'true';
+    //     const PURPLEAIR_API_KEY = process.env.PURPLEAIR_API_KEY ?? '';
+    //     const PURPLEAIR_READ_KEY = process.env.PURPLEAIR_READ_KEY ?? '';
+    //     const PURPLEAIR_SENSOR_IDS = process.env.PURPLEAIR_SENSOR_IDS?.split(',') || [];
+    //     const MOCK_DATA = process.env.MOCK_DATA === 'true';
 
     if (MOCK_DATA) {
         return Response.json([

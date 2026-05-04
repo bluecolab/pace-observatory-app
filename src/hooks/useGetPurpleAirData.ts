@@ -12,6 +12,6 @@ export const useGetPurpleAirData = () => {
     return useQuery({
         queryKey: ['purpleAir'],
         queryFn: fetchPurpleAir,
-        refetchInterval: 15*60*1000,
+        refetchInterval: 15 * 60 * 1000,
     });
 };

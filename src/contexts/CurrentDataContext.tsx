@@ -12,7 +12,6 @@ import useGetWaterReportsData from '@/hooks/useGetWaterReportsData';
 import { LocationType } from '@/types/location.type';
 import { CleanedWaterData, OdinData } from '@/types/water.interface';
 
-
 function getAQICategory(aqi: number) {
     if (aqi <= 50) return 'Good';
     if (aqi <= 100) return 'Moderate';
@@ -124,11 +123,7 @@ export default function CurrentDataProvider({ children }: { children: ReactNode 
     });
 
     // AQI Data Query
-    const {
-        data: purpleAirData,
-        error: aqiError,
-        refetch: refetchAQI,
-    } = useGetPurpleAirData();
+    const { data: purpleAirData, error: aqiError, refetch: refetchAQI } = useGetPurpleAirData();
 
     const normalizedAQIData = useMemo(() => {
         const sensor = purpleAirData?.[0];
