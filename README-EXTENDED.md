@@ -1,4 +1,4 @@
-# AquaWatch Mobile App
+# Pace Environmental Observatory App
 
 This folder contains the various files related to the application.
 

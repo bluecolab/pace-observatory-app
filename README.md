@@ -1,4 +1,4 @@
-# AquaWatch Mobile App
+# Pace Environmental Observatory App
 
 <div align="center">
 <img src="./assets/splash.png" height="250px" style="padding:10px;">
@@ -28,14 +28,14 @@
   <img src="https://img.shields.io/badge/Runs%20with%20Expo%20Go-4630EB.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000" alt="Runs with Expo Go">
 </a>
 <h2>Bringing water quality to your finger tips!</h2>
-Repo for AquaWatch Mobile app
+Repo for Pace Environmental Observatory app
 
 <hr>
 </div>
 
 ### About the Project
 
-Knowing what's in your water - is a human right. The AquaWatch Mobile App bring water data right to your finger tips. While the current scope of the app is limited to pond and river data, we hope to set an example for what's possible.
+Knowing what's in your water - is a human right. The Pace Environmental Observatory App bring water data right to your finger tips. While the current scope of the app is limited to pond and river data, we hope to set an example for what's possible.
 
 One day you'll know what's in the water that's coming out of your tap.
 
@@ -45,7 +45,6 @@ One day you'll know what's in the water that's coming out of your tap.
 - Monthly water quality reports with graphical representations.
 - Information about local wildlife and its dependence on water quality.
 - Access to Blue CoLab blogs.
-
 
 ### Getting Started
 
@@ -80,4 +79,3 @@ The members of the team include:
 - Erin Sorbella ([![Linkedin](https://i.stack.imgur.com/gVE0j.png)ln/erin-sorbella-40936b241](https://www.linkedin.com/in/erin-sorbella-40936b241/)) of Blue Jelly
 - Tyler Yeung ([![Linkedin](https://i.stack.imgur.com/gVE0j.png)ln/tyleryeung](https://www.linkedin.com/in/tyleryeung/)) of App Team 67
 - Leeza Zeidan
-

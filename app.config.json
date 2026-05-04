@@ -1,20 +1,25 @@
 {
   "expo": {
-    "name": "AquaWatch Mobile",
+    "name": "Pace Environmental Observatory",
     "slug": "AquaWatch_Mobile",
     "version": "1.10.0",
     "scheme": "expo-nav-template",
     "web": {
       "bundler": "metro",
-      "output": "static",
+      "output": "server",
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-router",
+      [
+        "expo-router",
+        {
+            "origin": "https://pace-environmental-observatory.expo.app/"
+        }
+    ],
       [
         "expo-location",
         {
-          "locationAlwaysAndWhenInUsePermission": "Allow AquaWatch Mobile to use your location."
+          "locationAlwaysAndWhenInUsePermission": "Allow Pace Environmental Observatory to use your location."
         }
       ],
       [

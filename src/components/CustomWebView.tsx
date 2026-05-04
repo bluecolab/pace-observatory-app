@@ -10,7 +10,7 @@ import { WebView, WebViewNavigation } from 'react-native-webview';
 const handleNavigation = (event: WebViewNavigation) => {
     // TODO: Use regex to check if the URL is from a specific domain
     const { url } = event;
-    const allowedDomains = ['aquawatchmobile.shinyapps.io', 'pace.edu'];
+    const allowedDomains = ['pace.edu'];
     const urlDomain = new URL(url).hostname;
     if (allowedDomains.some((domain) => urlDomain.endsWith(domain))) {
         return true;

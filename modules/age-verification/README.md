@@ -12,11 +12,13 @@ This module implements age verification via Google Play Age Signals API to compl
 ## Legal Requirements
 
 ### Texas (HB 18)
+
 - Verify age category for each user from app store data
 - Verify parental consent for minor users
 - Delete personal data after verification is complete
 
 ### Utah (HB 464)
+
 - Verify age category and parental consent via app store data sharing
 - Request verification at download, purchase, or significant app changes
 - Re-verify annually (max once per 12 months)
@@ -25,6 +27,7 @@ This module implements age verification via Google Play Age Signals API to compl
 - Cannot share age category data with anyone
 
 ### Louisiana
+
 - Similar requirements to Texas
 
 ## Architecture
@@ -32,25 +35,29 @@ This module implements age verification via Google Play Age Signals API to compl
 ### Components
 
 1. **Native Android Module** (`AgeVerificationModule.java`)
-   - Interfaces with Google Play Integrity API
-   - Provides low-level access to Age Signals
+
+    - Interfaces with Google Play Integrity API
+    - Provides low-level access to Age Signals
 
 2. **TypeScript Native Interface** (`AgeVerificationNative.ts`)
-   - Type-safe TypeScript interface to native module
-   - Defines data types and contracts
+
+    - Type-safe TypeScript interface to native module
+    - Defines data types and contracts
 
 3. **Service Layer** (`AgeVerificationService.ts`)
-   - High-level business logic
-   - Data storage and lifecycle management
-   - Compliance enforcement
+
+    - High-level business logic
+    - Data storage and lifecycle management
+    - Compliance enforcement
 
 4. **React Hook** (`useAgeVerification.ts`)
-   - Easy integration in React components
-   - Manages state and side effects
+
+    - Easy integration in React components
+    - Manages state and side effects
 
 5. **Expo Config Plugin** (`withAgeVerification.js`)
-   - Configures Android build with required dependencies
-   - Adds Google Play Services to build.gradle
+    - Configures Android build with required dependencies
+    - Adds Google Play Services to build.gradle
 
 ## Age Categories
 
@@ -118,9 +125,7 @@ console.log('Has parental consent:', result.hasParentalConsent);
 await AgeVerificationService.completeVerification();
 
 // Check age restrictions
-const canAccess = await AgeVerificationService.enforceAgeRestriction(
-    AgeCategory.ADULT
-);
+const canAccess = await AgeVerificationService.enforceAgeRestriction(AgeCategory.ADULT);
 
 // Check if user is minor
 const isMinor = await AgeVerificationService.isMinor();
@@ -135,18 +140,20 @@ const canEnforce = await AgeVerificationService.canEnforceTerms();
 ### Google Play Console Configuration
 
 1. **Enable Age Signals API** (Beta)
-   - Go to Google Play Console
-   - Navigate to your app
-   - Enable Age Signals in app settings
-   - This is currently in beta and requires enrollment
+
+    - Go to Google Play Console
+    - Navigate to your app
+    - Enable Age Signals in app settings
+    - This is currently in beta and requires enrollment
 
 2. **Age Rating**
-   - Complete the age rating questionnaire
-   - Ensure proper content rating is set
+
+    - Complete the age rating questionnaire
+    - Ensure proper content rating is set
 
 3. **Age Verification Settings**
-   - Configure age verification requirements
-   - Set up parental consent requirements if applicable
+    - Configure age verification requirements
+    - Set up parental consent requirements if applicable
 
 ### Build Configuration
 
@@ -160,11 +167,13 @@ The module automatically configures the Android build through the Expo config pl
 Since Age Signals API is in beta and requires Google Play Console configuration, testing in development has limitations:
 
 **Development Testing:**
+
 - The module is structured but returns mock data
 - Age category will be `UNKNOWN` until configured in Play Console
 - `isAvailable` will return false in most dev environments
 
 **Production Testing:**
+
 - Must be published through Google Play
 - Requires Age Signals API to be enabled in Play Console
 - Will return actual age data from Google Play
@@ -172,17 +181,20 @@ Since Age Signals API is in beta and requires Google Play Console configuration,
 ## Compliance Features
 
 ### Data Lifecycle
+
 1. **Request**: Get age category and consent status from Google Play
 2. **Store**: Temporarily store in AsyncStorage for session
 3. **Verify**: Use data for age restrictions and compliance
 4. **Delete**: Automatically delete personal data after verification
 
 ### Allowed Data Usage (per law)
+
 - Enforce age-related restrictions in the app
 - Ensure compliance with laws and regulations
 - Implement safety-related features and defaults
 
 ### Prohibited Actions
+
 - Sharing age category data with third parties
 - Enforcing contracts against minors without parental consent
 - Using data for purposes other than age verification
@@ -237,6 +249,7 @@ The Google Play Age Signals API is currently in beta. This means:
 ### Current Implementation
 
 The current implementation:
+
 - Provides complete infrastructure for Age Signals API
 - Returns mock data in development (age category: UNKNOWN)
 - Will work with actual API once configured in Play Console
@@ -262,16 +275,19 @@ The current implementation:
 ## Troubleshooting
 
 ### "Age verification not available"
+
 - Age Signals API only works on Android
 - Requires Google Play Services
 - Must be configured in Google Play Console
 
 ### "Age category is UNKNOWN"
+
 - Expected in development/testing
 - Requires production build through Play Store
 - Requires Age Signals API to be enabled in console
 
 ### "Failed to initialize Integrity Manager"
+
 - Device may not have Google Play Services
 - App may not be properly configured
 - Check Play Console settings
@@ -286,4 +302,4 @@ The current implementation:
 
 ## License
 
-This module is part of the AquaWatch Mobile App and is subject to the same license.
+This module is part of the Pace Environmental Observatory App and is subject to the same license.

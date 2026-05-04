@@ -1,6 +1,9 @@
 name: Expo Prod Build
 run-name: Build of Frontend
 
+permissions:
+    contents: read
+
 on:
     push:
         branches:
@@ -12,12 +15,12 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: 🏗 Setup repo
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6.0.2
               with:
                   fetch-depth: 0
 
             - name: 🏗 Setup Node
-              uses: actions/setup-node@v4
+              uses: actions/setup-node@v6.3.0
               with:
                   node-version: 24.x
 
@@ -29,8 +32,8 @@ jobs:
             - name: 🏗 Setup EAS
               run: npm install -g eas-cli
 
-            # - name: Validate package-lock.json
-            #   run: node scripts/check-package-lock.js
+            - name: Validate package-lock.json
+              run: node scripts/check-package-lock.js
 
             - name: Install Python deps
               run: |

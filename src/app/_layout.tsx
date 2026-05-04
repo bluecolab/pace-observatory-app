@@ -44,13 +44,23 @@ async function registerForPushNotificationsAsync() {
     }
 
     if (Device.isDevice) {
-        const { status: existingStatus } = await Notifications.getPermissionsAsync();
-        let finalStatus = existingStatus;
-        if (existingStatus !== 'granted') {
-            const { status } = await Notifications.requestPermissionsAsync();
-            finalStatus = status;
+        const hasNotificationPermission = (
+            permissions: Notifications.NotificationPermissionsStatus
+        ) => {
+            if (Platform.OS !== 'ios') return true;
+            return (
+                permissions.ios?.status === Notifications.IosAuthorizationStatus.AUTHORIZED ||
+                permissions.ios?.status === Notifications.IosAuthorizationStatus.PROVISIONAL
+            );
+        };
+
+        const existingPermissions = await Notifications.getPermissionsAsync();
+        let isGranted = hasNotificationPermission(existingPermissions);
+        if (!isGranted) {
+            const requestedPermissions = await Notifications.requestPermissionsAsync();
+            isGranted = hasNotificationPermission(requestedPermissions);
         }
-        if (finalStatus !== 'granted') {
+        if (!isGranted) {
             handleRegistrationError(
                 'Permission not granted to get push token for push notification!'
             );
