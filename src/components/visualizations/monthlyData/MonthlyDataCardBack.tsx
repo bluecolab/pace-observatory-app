@@ -1,4 +1,4 @@
-import FontAwesome from "@react-native-vector-icons/fontawesome";
+import FontAwesome from '@react-native-vector-icons/fontawesome';
 import React from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 

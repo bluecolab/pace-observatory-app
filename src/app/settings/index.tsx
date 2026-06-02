@@ -1,5 +1,5 @@
-import FontAwesome from "@react-native-vector-icons/fontawesome";
-import Ionicons from "@react-native-vector-icons/ionicons";
+import FontAwesome from '@react-native-vector-icons/fontawesome';
+import Ionicons from '@react-native-vector-icons/ionicons';
 import { router, Stack } from 'expo-router';
 import React, { useCallback, useState } from 'react';
 import { View, Text, ScrollView, Pressable, Platform } from 'react-native';

@@ -1,4 +1,4 @@
-import FontAwesome from "@react-native-vector-icons/fontawesome";
+import FontAwesome from '@react-native-vector-icons/fontawesome';
 import React, { ReactNode } from 'react';
 import { View, Text } from 'react-native';
 

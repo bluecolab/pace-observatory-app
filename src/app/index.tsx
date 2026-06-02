@@ -1,4 +1,4 @@
-import FontAwesome from "@react-native-vector-icons/fontawesome";
+import FontAwesome from '@react-native-vector-icons/fontawesome';
 import { router } from 'expo-router';
 import {
     Image,
