@@ -1,4 +1,4 @@
-import { FontAwesome } from '@expo/vector-icons';
+import FontAwesome from "@react-native-vector-icons/fontawesome";
 import { router, Stack } from 'expo-router';
 import { useCallback } from 'react';
 import { View, Text, ScrollView, Pressable } from 'react-native';

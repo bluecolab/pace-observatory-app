@@ -1,6 +1,4 @@
-// app/(tabs)/home/waterReport.tsx
-
-import { FontAwesome } from '@expo/vector-icons';
+import FontAwesome from "@react-native-vector-icons/fontawesome";
 import { router, Stack } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { View, Text, FlatList, Pressable, Modal } from 'react-native';

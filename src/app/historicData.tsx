@@ -1,4 +1,4 @@
-import { FontAwesome } from '@expo/vector-icons';
+import FontAwesome from "@react-native-vector-icons/fontawesome";
 import { getMonth, getYear, getDaysInMonth } from 'date-fns';
 import { Stack } from 'expo-router';
 import React, { useState, useCallback, useEffect, useRef, useMemo } from 'react';
