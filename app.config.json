@@ -13,9 +13,9 @@
       [
         "expo-router",
         {
-            "origin": "https://pace-environmental-observatory.expo.app/"
+          "origin": "https://pace-environmental-observatory.expo.app/"
         }
-    ],
+      ],
       [
         "expo-location",
         {
@@ -37,7 +37,8 @@
       "expo-web-browser",
       "expo-font",
       "./modules/age-verification/withAgeVerification",
-      "expo-notifications"
+      "expo-notifications",
+      "expo-status-bar"
     ],
     "experiments": {
       "typedRoutes": true,
@@ -45,11 +46,6 @@
     },
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "assetBundlePatterns": [
       "**/*"
     ],

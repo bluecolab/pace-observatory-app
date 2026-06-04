@@ -12,7 +12,8 @@
         "scripts/*",
         "assets/*",
         "public/*",
-        "cspell-ext.json"
+        "cspell-ext.json",
+        "package.json"
     ],
     "words": [
         "Acipenser",

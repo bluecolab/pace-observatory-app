@@ -4,11 +4,15 @@ const tsParser = require('@typescript-eslint/parser');
 const pluginReact = require('eslint-plugin-react');
 const pluginReactHooks = require('eslint-plugin-react-hooks');
 const tseslint = require('@typescript-eslint/eslint-plugin');
-const globals = require('globals');
 
 module.exports = [
     {
-        files: ['**/*.ts', '**/*.tsx'],
+        files: [
+            'app/**/*.{js,ts,jsx,tsx}',
+            'components/**/*.{js,ts,jsx,tsx}',
+            'contexts/**/*.{js,ts,jsx,tsx}',
+            'hooks/**/*.{js,ts,jsx,tsx}',
+        ],
         languageOptions: {
             parser: tsParser,
             parserOptions: {
@@ -16,10 +20,6 @@ module.exports = [
                 sourceType: 'module',
                 ecmaFeatures: { jsx: true },
                 project: './tsconfig.json',
-            },
-            globals: {
-                ...globals.browser,
-                ...globals.node,
             },
         },
         plugins: {
@@ -33,9 +33,6 @@ module.exports = [
             'import/resolver': {
                 typescript: {
                     project: path.resolve('./tsconfig.json'),
-                },
-                node: {
-                    extensions: ['.js', '.jsx', '.ts', '.tsx'],
                 },
             },
         },
@@ -56,7 +53,6 @@ module.exports = [
             'react-hooks/rules-of-hooks': 'error',
             'react-hooks/exhaustive-deps': 'error',
 
-            // TypeScript rules
             '@typescript-eslint/no-unused-vars': [
                 'error',
                 {
@@ -80,7 +76,8 @@ module.exports = [
                 },
             ],
 
-            'no-undef': 'error',
+            // TypeScript rules
+            '@typescript-eslint/no-unused-vars': 'error',
         },
     },
 ];
