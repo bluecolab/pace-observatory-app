@@ -88,5 +88,8 @@
   "overrides": {
     "react-dom": "19.2.0"
   },
-  "private": false
+  "private": false,
+  "allowScripts": {
+    "@shopify/react-native-skia@2.6.2": true
+  }
 }
