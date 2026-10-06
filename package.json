@@ -16,6 +16,7 @@
       "reactNativeDirectoryCheck": {
         "exclude": [
           "react-native-orientation-locker",
+          "react-native-age-range",
           "react-native-navigation-bar",
           "react-navigation",
           "react-navigation-stack",

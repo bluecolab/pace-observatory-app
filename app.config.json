@@ -36,7 +36,6 @@
       ],
       "expo-web-browser",
       "expo-font",
-      "./modules/age-verification/withAgeVerification",
       "expo-notifications",
       "expo-status-bar"
     ],
