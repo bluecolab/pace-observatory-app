@@ -55,6 +55,9 @@
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "We use your location to show you nearby stations of interest near you.",
         "ITSAppUsesNonExemptEncryption": false
+      },
+      "entitlements": {
+        "com.apple.developer.declared-age-range": true
       }
     },
     "android": {

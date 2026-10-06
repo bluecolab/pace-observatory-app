@@ -39,6 +39,7 @@
     "babel-preset-expo": "~57.0.0",
     "date-fns": "4.4.0",
     "expo": "~57.0.21",
+    "expo-age-range": "57.0.5",
     "expo-constants": "~57.0.10",
     "expo-device": "~57.0.1",
     "expo-font": "~57.0.1",
